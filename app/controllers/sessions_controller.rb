@@ -2,11 +2,12 @@ class SessionsController < ApplicationController
   def new
   end
 
-  def login_attempt
-    authorized_user = User.authenticate(params[:email],params[:login_password])
-    if authorized_user
-      session[:user_id] = authorized_user.id
-      flash[:notice] = "Wow Welcome again, #{authorized_user.username}"
+  def create
+    user = User.find_by_username(params[:session][:username])
+
+    if user && user.authenticate(params[:session][:password])
+      session[:user_id] = user.id
+      flash[:notice] = "Welcome Back, #{user.username}!"
       redirect_to questions_path
     else
       flash[:danger] = 'Invalid email/password combination'
