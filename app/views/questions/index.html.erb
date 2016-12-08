@@ -1,0 +1,15 @@
+<h1> All Questions </h1>
+<%= link_to 'New question', new_question_path %>
+<table>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.title %></td>
+        <td><%= question.author.username %></td>
+        <td><%= link_to 'Show', question_path(question) %></td>
+        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <td><%= link_to 'Destroy', question_path(question),
+          method: :delete,
+          data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <%end%>
+</table>

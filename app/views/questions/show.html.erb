@@ -1,0 +1,28 @@
+<p>
+<strong>Title</strong>
+<%= @question.title %>
+</p>
+
+<p>
+<strong>Text</strong>
+<%= @question.body %>
+</p>
+
+<p>
+<strong>Author</strong>
+<%= @question.author.username %>
+</p>
+
+<p><%= link_to 'Back',  questions_path %>
+
+  <h2>Answers:</h2>
+  <%= @answers.each do |answer| %>
+    <strong> User </strong>
+    <%=  answer.user.username %>
+    <strong> Answer </strong>
+    <%= answer.body %>
+  <% end %>
+
+
+  <h2>Create new answer</h2>
+  <%= render 'answers/form' %>

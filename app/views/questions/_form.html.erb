@@ -1,0 +1,14 @@
+
+<%= form_for @question do |f| %>
+  <p> Title:</br> <%= f.text_field :title%> </p>
+  <p> Text:</br> <%= f.text_field :body%> </p>
+
+  <%= f.submit :Submit %>
+<% end %>
+<%if @question.errors.any? %>
+  <ul class="Signup_Errors">
+    <% for message_error in @question.errors.full_messages %>
+      <li> * <%=  message_error %></li>
+    <% end %>
+  </ul>
+<% end %>
