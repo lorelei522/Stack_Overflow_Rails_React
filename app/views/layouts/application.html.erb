@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Stack</title>
+    <title>Stack Overflow</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
-    <%= yield %>
+    <nav>
+      <div class="nav-wrapper red darken-4">
+        <%= link_to "Stack Overflow", questions_path, class: "brand-logo" %>
+        <ul id="nav-mobile" class="right hide-on-med-and-down ">
+          <% if logged_in? %>
+            <li><%= link_to "Create new Question", new_question_path %></li>
+            <li><%= link_to "#{current_user.username}", user_path(current_user) %></li>
+            <li><%= link_to "Log Out", session_path(session), method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Create an Account", new_user_path  %></li>
+            <li><%= link_to "Log In", new_session_path  %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
