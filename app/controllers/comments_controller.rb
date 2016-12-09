@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
     redirect_to question_path(@question)
   end
 
+
   private
     def comment_params
       params.require(:comment).permit(:body)
