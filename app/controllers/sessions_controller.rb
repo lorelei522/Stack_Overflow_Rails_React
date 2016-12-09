@@ -3,9 +3,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_username(params[:session][:username])
-
-    if user && user.authenticate(params[:session][:password])
+    user = User.find_by_email(params[:email])
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:notice] = "Welcome Back, #{user.username}!"
       redirect_to questions_path
@@ -17,7 +16,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to(:action => 'questions')
+    redirect_to questions_path
   end
 
 

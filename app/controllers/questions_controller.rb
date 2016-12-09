@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
 
   def index
     link = "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=puppies"
-    @gif = JSON.parse(open(link).read)["data"]["image_url"] 
+    @gif = JSON.parse(open(link).read)["data"]["image_url"]
     @questions = Question.all
   end
 
