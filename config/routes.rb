@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-  get 'answers/new'
-
-  get 'sessions/new'
-  post 'sessions/login_attempt'
 
   resources :users
   resources :questions do
+    resources :comments
     resources :answers
   end
   resources :sessions

@@ -6,13 +6,26 @@
 Asked By: <%= link_to @question.author.username, user_path(@question.author) %>
 </p>
 
-
-<h4>Answers:</h4>
-<% @answers.each do |answer| %>
-  <ul>
-    <li><%= answer.body %></li>
-    <p>- <%=answer.user.username%></p>
-  </ul>
+<% unless @question.comments.empty? %>
+  <strong>Comments</strong>
+  <% @question.comments.each do |comment| %>
+    <ul>
+      <li><%= comment.body %></li>
+      <p>- <%= link_to User.find(comment.commenter_id).username, user_path(User.find(comment.commenter_id)) %></p>
+    </ul>
+  <% end %>
 <% end %>
+
+<p><%= link_to 'Create a New Comment', new_question_comment_path(@question) %></p>
+
+<% unless @question.answers.empty? %>
+  <h4>Answers:</h4>
+  <% @answers.each do |answer| %>
+    <ul>
+      <li><%= answer.body %></li>
+      <p>- <%= link_to answer.user.username, user_path(answer.user) %></p>
+    </ul>
+  <% end %>
+<%end%>
 
 <p><%= link_to 'Create a New Answer', new_question_answer_path(@question) %></p>
