@@ -4,10 +4,16 @@
 
   <%= f.submit :Submit %>
 <% end %>
-<%if @question.errors.any? %>
-  <ul class="Signup_Errors">
-    <% for message_error in @question.errors.full_messages %>
-      <li> * <%=  message_error %></li>
-    <% end %>
-  </ul>
+
+<% if @answer.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@answer.errors.count, "errors") %> prohibited this article from being saved:
+    </h2>
+    <ul>
+      <% @answer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
