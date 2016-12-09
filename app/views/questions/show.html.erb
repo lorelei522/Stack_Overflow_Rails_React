@@ -1,28 +1,18 @@
+<h3><%= @question.title %></h3>
 <p>
-<strong>Title</strong>
-<%= @question.title %>
-</p>
-
-<p>
-<strong>Text</strong>
 <%= @question.body %>
 </p>
-
 <p>
-<strong>Author</strong>
-<%= @question.author.username %>
+Asked By: <%= link_to @question.author.username, user_path(@question.author) %>
 </p>
 
-<p><%= link_to 'Back',  questions_path %>
 
-  <h2>Answers:</h2>
-  <%= @answers.each do |answer| %>
-    <strong> User </strong>
-    <%=  answer.user.username %>
-    <strong> Answer </strong>
-    <%= answer.body %>
-  <% end %>
+<h4>Answers:</h4>
+<% @answers.each do |answer| %>
+  <ul>
+    <li><%= answer.body %></li>
+    <p>- <%=answer.user.username%></p>
+  </ul>
+<% end %>
 
-
-  <h2>Create new answer</h2>
-  <%= render 'answers/form' %>
+<p><%= link_to 'Create a New Answer', new_question_answer_path(@question) %></p>

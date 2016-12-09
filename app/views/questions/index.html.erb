@@ -1,15 +1,28 @@
+
 <h1> All Questions </h1>
 <%= link_to 'New question', new_question_path %>
-<table>
-    <% @questions.each do |question| %>
-      <tr>
-        <td><%= question.title %></td>
-        <td><%= question.author.username %></td>
-        <td><%= link_to 'Show', question_path(question) %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question_path(question),
-          method: :delete,
-          data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <%end%>
-</table>
+<div class="row">
+  <% @questions.each do |question| %>
+  <div class="col s4">
+    <div class= "card">
+      <div class="card-image waves-effect waves-block waves-light">
+        <% if @gif %>
+        <%= image_tag(@gif) %>
+        <% end %>
+      </div>
+      <div class="card-content">
+        <span class="card-title truncate activator grey-text text-darken-4"><%= question.title %><i class="material-icons right">more_vert</i></span>
+        <p><%= link_to 'Show', question_path(question) %></p>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4"><%= question.title %><i class="material-icons right">close</i></span>
+        <p><%=question.body%></p>
+        <div class="card-action">
+          <%= link_to 'Answer', new_question_answer_path(question) %>
+          <%= link_to 'Comment', new_question_answer_path(question) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%end%>
+</div>

@@ -1,0 +1,7 @@
+<h3><%= @user.username%>'s Questions</h3>
+
+<ul>
+  <% @user.questions.each do |question| %>
+    <li><%= link_to question.title, question_path(question) %></li>
+  <%end%>
+</ul>
