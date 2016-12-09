@@ -2,7 +2,6 @@ class QuestionsController < ApplicationController
   before_action :find_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    link = "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=puppies"
     @gif = JSON.parse(open(link).read)["data"]["image_url"]
     @questions = Question.all
   end
@@ -50,5 +49,9 @@ class QuestionsController < ApplicationController
 
   def find_question
     @question = Question.find(params[:id])
+  end
+
+  def link
+    "http://api.giphy.com/v1/gifs/random?api_key=" + ENV["GIPHY_API_KEY"] + "&tag=puppies"
   end
 end
